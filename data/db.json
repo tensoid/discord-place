@@ -1,0 +1,20 @@
+{
+  "place": {},
+  "users": [
+    {
+      "name": "tensoid",
+      "id": "304974398472060928",
+      "token": "fQp+XCHfsqllD0Xkrb5lrw==",
+      "lastDrawTime": 0
+    }
+  ],
+  "discordBot": {
+    "guilds": [
+      {
+        "guildID": "751734515420102737",
+        "channelID": "959518864419487744",
+        "messageID": "959921145790992416"
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "discord-place",
+  "version": "0.0.0",
+  "description": "A unique \"r/place\" for your discord server.",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tensoid/discord-place.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tensoid/discord-place/issues"
+  },
+  "homepage": "https://github.com/tensoid/discord-place#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.0",
+    "ejs": "~2.6.1",
+    "eris": "^0.16.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "yuuko": "^2.3.2"
+  }
+}
