@@ -135,7 +135,7 @@ class Cursor {
   updateCursor(){
 
     this.setCursorPosition(this.currentCurserPosition.x, this.currentCurserPosition.y);
-    this.curserElement.style.width = `${40 * camera.getScale()}px`;
-    this.curserElement.style.height = `${40 * camera.getScale()}px`;
+    this.curserElement.style.width = `${46 * camera.getScale()}px`;
+    this.curserElement.style.height = `${46 * camera.getScale()}px`;
   }
 }

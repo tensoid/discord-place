@@ -34,12 +34,13 @@ canvas {
 }
 
 .cursor {
+  transform: translate(-3px, -3px);
   position: absolute;
   z-index: 2;
   background-image: url('/images/cursor.png');
   background-size: cover;
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   image-rendering: crisp-edges;
   opacity: 0;
 }
