@@ -10,6 +10,12 @@ class ControlPanel {
       if(this.submitButtonPressedCallback) this.submitButtonPressedCallback();
     });
 
+    window.addEventListener("keyup", (e) => {
+      if(e.key == " ") {
+        if(this.submitButtonPressedCallback) this.submitButtonPressedCallback();
+      }
+    });
+
     this.setSelectedColor(document.querySelector(".color-block"));
     this.previousColorBlockElement = document.querySelector(".color-block");
     this.submitButtonPressedCallback = null;
