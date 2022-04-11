@@ -56,4 +56,5 @@ canvas {
   user-select: none;  
   padding: 3px 12px 3px 12px; 
   border-radius: 10px;
+  z-index: 5;
 }
