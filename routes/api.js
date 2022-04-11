@@ -54,5 +54,23 @@ router.get('/resetcanvas', function(req, res, next) {
 });
 
 
+router.get('/setcooldown', function(req, res, next) {
+  let adminToken = req.query.token;
+  let cooldown = req.query.cooldown;
+
+  if(!cooldown  || !adminToken) {
+    return res.json({code: -1, message: "Invalid arguments"});
+  }
+
+  if(!isNumeric(cooldown)) {
+    return res.json({code: -1, message: "Invalid arguments"});
+  }
+
+  let result = db.place.trySetCooldown(Math.round(parseInt(cooldown)), adminToken);
+
+  return res.json(result);
+});
+
+
 
 module.exports = router;

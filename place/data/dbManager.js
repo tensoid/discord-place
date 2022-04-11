@@ -65,6 +65,18 @@ const dbAccess = {
       getServer().canvasReset();
       
       return {result: 0, message: "Success"};
+    },
+
+    trySetCooldown(cooldown, token){
+      if(token != process.env.ADMIN_API_TOKEN){
+        return {result: -3, message: "Not authorized"};
+      }
+
+      config.placeCooldown = cooldown;
+
+      saveConfig();
+
+      return {result: 0, message: "Success"};
     }
   }
   //----[Users]----------------------------
@@ -125,6 +137,12 @@ const dbAccess = {
 
 function save(){
   fs.writeFile(join("place", "data", "db.json"), JSON.stringify(db, null, 2), function(err) {
+    if (err) console.log(err);
+  });
+}
+
+function saveConfig(){
+  fs.writeFile(join("place", "config.json"), JSON.stringify(config, null, 2), function(err) {
     if (err) console.log(err);
   });
 }
