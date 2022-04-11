@@ -55,7 +55,7 @@ class Camera {
     newY = Math.max(this.cameraElement.clientHeight / 2 - canvasSize.height, newY);
 
 
-    this.panElement.style.transform = `translateX(${newX}px) translateY(${newY}px)`;
+    this.setPanElementPosition(newX, newY);
   }
 
   centerCanvas(){
@@ -63,6 +63,10 @@ class Camera {
     let newX = this.cameraElement.clientWidth / 2 - canvasSize.width / 2;
     let newY = this.cameraElement.clientHeight / 2 - canvasSize.height / 2;
 
-    this.panElement.style.transform = `translateX(${newX}px) translateY(${newY}px)`;
+    this.setPanElementPosition(newX, newY);
+  }
+
+  setPanElementPosition(x, y){
+    this.panElement.style.transform = `translateX(${x}px) translateY(${y}px)`;
   }
 }

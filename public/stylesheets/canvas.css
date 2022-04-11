@@ -3,6 +3,13 @@ canvas {
   transform: scale(40);
   transform-origin:top left;
   position: absolute;
+  -ms-interpolation-mode: bicubic;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges; /* so crisp */
+  image-rendering: pixelated;
+  background-color: white;
+  pointer-events: none;
 }
 
 .pan-element {
