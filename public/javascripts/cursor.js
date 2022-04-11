@@ -128,8 +128,8 @@ class Cursor {
 
     let screenSpace = this.worldToScreenSpace(x, y);
 
-    this.curserElement.style.left = `${screenSpace.x}px`;
-    this.curserElement.style.top = `${screenSpace.y}px`;
+    this.curserElement.style.left = `${screenSpace.x - 3 * camera.getScale()}px`;
+    this.curserElement.style.top = `${screenSpace.y - 3 * camera.getScale()}px`;
   }
 
   updateCursor(){

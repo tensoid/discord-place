@@ -34,7 +34,6 @@ canvas {
 }
 
 .cursor {
-  transform: translate(-3px, -3px);
   position: absolute;
   z-index: 2;
   background-image: url('/images/cursor.png');
