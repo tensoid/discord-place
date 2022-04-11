@@ -4,7 +4,6 @@ class ControlPanel {
 
     this.currentCooldown = 0;
     this.cooldownElement = document.querySelector(".cooldown");
-    this.cooldownElement.style.display = "none";
 
     this.submitButtonElement = document.querySelector(".submit-button");
     this.submitButtonElement.addEventListener("click", () => {
