@@ -14,11 +14,16 @@ class Cursor {
     this.mouseY = 0;
 
     this.currentCurserPosition = {
-      x: null,
-      y: null 
+      x: 0,
+      y: 0 
     };
 
     this.initEventListeners();
+  }
+
+  init(){
+    this.updateCursor();
+    this.curserElement.style.opacity = 1;
   }
 
   initEventListeners() {
@@ -86,6 +91,7 @@ class Cursor {
     camera.updatePosition(-(mousePosWorldBeforeZoom.x - mousePosWorldAfterZoom.x) * 40 * camera.getScale(), -(mousePosWorldBeforeZoom.y - mousePosWorldAfterZoom.y)* 40 * camera.getScale());
     
     this.updateCursor();
+    this.curserElement.style.opacity = 1;
   }
 
 
@@ -121,8 +127,8 @@ class Cursor {
     if(x < 0 || y < 0) return;
     if(x >= canvas.width || y >= canvas.height) return;
 
-    if(camera.getScale() < 0.2) this.curserElement.style.opacity = 0;
-    else this.curserElement.style.opacity = 1;
+    //if(camera.getScale() < 0.2) this.curserElement.style.opacity = 1;
+    //else this.curserElement.style.opacity = 1;
 
     this.currentCurserPosition.x = x;
     this.currentCurserPosition.y = y;
@@ -136,7 +142,6 @@ class Cursor {
   }
 
   updateCursor(){
-
     this.setCursorPosition(this.currentCurserPosition.x, this.currentCurserPosition.y);
     this.curserElement.style.width = `${46 * camera.getScale()}px`;
     this.curserElement.style.height = `${46 * camera.getScale()}px`;

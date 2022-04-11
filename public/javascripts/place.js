@@ -68,6 +68,7 @@ function onPlace(place){
   canvas.init(place.length, place[0].length);
   canvas.drawPlace(place);
   camera.init(40 * place.length, 40 * place[0].length);
+  cursor.init();
 }
 
 function onTilePlaced(data){
