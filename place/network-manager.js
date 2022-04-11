@@ -38,4 +38,8 @@ class NetworkManager {
   tilePlaced(x, y, color) {
     this.server.emit("tilePlaced", {x, y, color});
   }
+
+  canvasReset(){
+    this.server.emit("place", this.db.place.get());
+  }
 }

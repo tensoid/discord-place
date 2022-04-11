@@ -3,7 +3,6 @@ class Canvas {
   constructor(canvas) {
     this.canvas = document.querySelector("#place-canvas");
     this.ctx = this.canvas.getContext("2d");
-    this.initted = false;
   }
 
   init(width, height){
@@ -11,7 +10,6 @@ class Canvas {
     this.height = height;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    this.initted = true;
   }
 
   drawPlace(place){

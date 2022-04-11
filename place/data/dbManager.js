@@ -44,6 +44,27 @@ const dbAccess = {
       getServer().tilePlaced(x, y, color);
 
       return {result: 0, message: "Success", cooldown: config.placeCooldown};
+    },
+
+    tryResetCanvas(sizeX, sizeY, token){
+      if(token != process.env.ADMIN_API_TOKEN){
+        return {result: -3, message: "Not authorized"};
+      }
+
+      let newCanvas = [];
+      for(let i = 0; i < sizeX; i++){
+        newCanvas.push([]);
+        for(let j = 0; j < sizeY; j++){
+          newCanvas[i].push(0);
+        }
+      }
+
+      db.place = newCanvas;
+
+      // broadcast to clients
+      getServer().canvasReset();
+      
+      return {result: 0, message: "Success"};
     }
   }
   //----[Users]----------------------------

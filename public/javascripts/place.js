@@ -63,7 +63,7 @@ controlPanel.setSubmitButtonPressedCallback(onSubmitButtonPressed);
 
 // ----[Network Events]----------------------
 function onPlace(place){
-  if(!canvas.initted) canvas.init(place.length, place[0].length);
+  canvas.init(place.length, place[0].length);
   canvas.drawPlace(place);
   camera.init(40 * place.length, 40 * place[0].length);
 }
