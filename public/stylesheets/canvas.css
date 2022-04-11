@@ -8,7 +8,6 @@ canvas {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges; /* so crisp */
   image-rendering: pixelated;
-  background-color: white;
   pointer-events: none;
 }
 
@@ -34,13 +33,6 @@ canvas {
   flex-direction: column;
 }
 
-.cursors {
-  background-color: red;
-  border-radius: 50%;
-  position: absolute;
-  z-index: 1;
-}
-
 .cursor {
   position: absolute;
   z-index: 2;
@@ -49,4 +41,5 @@ canvas {
   width: 40px;
   height: 40px;
   image-rendering: crisp-edges;
+  opacity: 0;
 }

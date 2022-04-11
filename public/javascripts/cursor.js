@@ -3,7 +3,6 @@ class Cursor {
 
     this.cameraElement = document.querySelector(".camera");
     this.curserElement = document.querySelector(".cursor");
-    this.curserElement.style.opacity = 0;
   
     this.mouseDown = false;
     this.mouseDragging = false;
