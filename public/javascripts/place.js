@@ -19,8 +19,9 @@ function onSubmitButtonPressed(){
   // check if token cookie is already set
   let token = Cookies.get("token");
   if(token == ""){
-    token = prompt("Please enter your token. If you do not have one yet you can get it from the Discord Place Bot.", "")
+    token = prompt("Please enter your token. If you do not have one, you can get it from the Discord Place Bot.", "")
     if(token == "") return;
+    if(token == null) return;
     Cookies.set("token", token, 1);
   }
 
@@ -43,8 +44,9 @@ function onSubmitButtonPressed(){
   fetch(`/api/placepixel?x=${x}&y=${y}&color=${color}&token=${token}`).then(res => {
     res.json().then(data => {
       if(data.result == -3){
-        token = prompt("The token you entered previously was invalid. Please enter a valid one. If you do not have one yet you can get it from the Discord Place Bot.", "")
+        token = prompt("The token you entered previously was invalid. Please enter a valid one. If you do not have one, you can get it from the Discord Place Bot.", "")
         if(token == "") return;
+        if(token == null) return;
         Cookies.set("token", token, 1);
       }
       else if(data.result == -2){
