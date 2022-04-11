@@ -43,3 +43,19 @@ canvas {
   image-rendering: crisp-edges;
   opacity: 0;
 }
+
+.coordinate-display {
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 3%;
+  transform: translate(-50%);
+  font-family: monospace;
+  font-weight: 600;
+  text-align: center;
+  font-size: 12px;
+  line-height: 12px;
+  user-select: none;  
+  padding: 3px 12px 3px 12px; 
+  border-radius: 10px;
+}
