@@ -2,10 +2,65 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/utils.js"></script>
+    <script src="/javascripts/network-manager.js"></script>
+    <script src="/javascripts/canvas.js"></script>
+    <script src="/javascripts/camera.js"></script>
+    <script src="/javascripts/cursor.js"></script>
+    <script src="/javascripts/controlPanel.js"></script>
+    <script defer src="/javascripts/place.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+    <div class="main-container">
+
+      <div class="camera">
+        <div class="cursor"></div>
+        <div class="pan-element" style="transform: translateX(0px) translateY(0px);">
+          <div class="zoom-element" style="transform: scale(0.25);">
+          <canvas id="place-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+  
+      <div class="control-container">
+
+        <div class="color-block-container">
+          <div id="0" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #ffffff;"></div>
+          <div id="1" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #be0039;"></div>
+          <div id="2" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #ff4500;"></div>
+          <div id="3" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #ffa800;"></div>
+          <div id="4" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #ffd635;"></div>
+          <div id="5" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #00a368;"></div>
+          <div id="6" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #00cc78;"></div>
+          <div id="7" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #7eed56;"></div>
+          <div id="8" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #00756f;"></div>
+          <div id="9" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #009eaa;"></div>
+          <div id="10" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #2450a4;"></div>
+          <div id="11" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #3690ea;"></div>
+          <div id="12" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #51e9f4;"></div>
+          <div id="13" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #493ac1;"></div>
+          <div id="14" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #6a5cff;"></div>
+          <div id="15" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #811e9f;"></div>
+          <div id="16" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #b44ac0;"></div>
+          <div id="17" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #ff3881;"></div>
+          <div id="18" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #ff99aa;"></div>
+          <div id="19" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #6d482f;"></div>
+          <div id="20" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #9c6926;"></div>
+          <div id="21" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #000000;"></div>
+          <div id="22" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #898d90;"></div>
+          <div id="23" class="color-block" onclick="controlPanel.setSelectedColor(this)" style="background-color: #d4d7d9;"></div>  
+        </div>
+
+        <div class="button-container">
+          <span class="cooldown">Cooldown: 200s</span>
+          <div class="submit-button">Place</div>
+        </div>
+
+      </div>
+      
+    </div>
   </body>
 </html>

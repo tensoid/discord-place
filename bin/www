@@ -8,7 +8,7 @@ require('dotenv').config()
 /**
  * Initialize database
  */
-require("../data/dbManager.js");
+require("../place/data/dbManager.js");
 
 /**
  * Module dependencies.
@@ -37,6 +37,8 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+require("../place/network-manager").createServer(server);
 
 /**
  * Normalize a port into a number, string, or false.

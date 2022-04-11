@@ -13,20 +13,20 @@ module.exports = new EventListener("messageReactionAdd", (message, emoji, member
       if(alreadyRegistered) {
         channel.createMessage({embeds: [{
           "title": `Hello ${member.username}!`,
-          "description": "This is your new personal access token to modify the place.\n```" + token + "```\n",
+          "description": "This is your new personal access token to modify the Place.\n```" + token + "```\n",
           "color": 47296,
           "author": {
-            "name": "rPlace Bot"
+            "name": "Place Bot"
           }
         }]});
       }
       else {
         channel.createMessage({embeds: [{
           "title": `Welcome ${member.username}!`,
-          "description": "This is your personal access token to modify the place.\n```" + token + "```\nDo not share this token with others!\nIn the case that you want to reset your token because you lost it or accidentally leaked it just react to any rPlace Bot welcome message on any server and another one will be sent to you.",
+          "description": "This is your personal access token to modify the Place.\n```" + token + "```\nDo not share this token with others!\nIn the case that you want to reset your token because you lost it or accidentally leaked it just react to any rPlace Bot welcome message on any server and another one will be sent to you.",
           "color": 47296,
           "author": {
-            "name": "rPlace Bot"
+            "name": "Place Bot"
           }
         }]});
       }

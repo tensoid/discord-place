@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+
+// Redirect everything to '/'
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Place'});
 });
 
-/* GET place page */
-router.get('/place/:ID', function(req, res, next) {
-  let placeID = req.params.ID;
-  res.render('place', { title: 'Place', placeID });
+
+router.get('*', function(req, res, next) {
+  res.redirect('/');
 });
+
 
 module.exports = router;

@@ -2,10 +2,10 @@
 var fs = require('fs');
 var { join } = require('path');
 
-// Variables
+let { getServer } = require('../network-manager');
 let db = require('./db.json');
-
 let utils = require('./utils.js');
+let config = require('../config.json');
 let saveInterval = 2000;
 
 
@@ -13,7 +13,38 @@ let saveInterval = 2000;
 const dbAccess = {
   //----[Place]----------------------------
   place : {
+    get(){
+      return db.place;
+    },
 
+    tryPlacePixel(x, y, color, token){
+
+      // check if authorized
+      if(!db.users.map(user => user.token).includes(token)){
+        return {result: -3, message: "Not authorized"};
+      }
+
+      // check if on cooldown
+      let user = db.users.find(user => user.token == token);
+      if(Date.now() - user.lastDrawTime <= config.placeCooldown){
+        return {result: -2, message: "On cooldown", cooldown: config.placeCooldown - (Date.now() - user.lastDrawTime)};
+      }
+
+      // check if valid arguments
+      if(!utils.isValidPixel(x, y, dbAccess) || !utils.isValidColor(color)){
+        return {result: -1, message: "Invalid arguments"};
+      }
+
+
+      // place pixel
+      db.place[x][y] = color;
+      user.lastDrawTime = Date.now();
+
+      // broadcast to clients
+      getServer().tilePlaced(x, y, color);
+
+      return {result: 0, message: "Success", cooldown: config.placeCooldown};
+    }
   }
   //----[Users]----------------------------
   , users : {
@@ -47,6 +78,10 @@ const dbAccess = {
 
     getUser(id){
       return db.users.find(user => user.id === id);
+    },
+
+    validateToken(token){
+      return db.users.find(user => user.token === token) !== undefined;
     }
     
   },
@@ -68,7 +103,7 @@ const dbAccess = {
 
 
 function save(){
-  fs.writeFile(join("data", "db.json"), JSON.stringify(db, null, 2), function(err) {
+  fs.writeFile(join("place", "data", "db.json"), JSON.stringify(db, null, 2), function(err) {
     if (err) console.log(err);
   });
 }

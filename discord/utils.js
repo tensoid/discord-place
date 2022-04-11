@@ -1,11 +1,11 @@
 module.exports = {
   welcomeMessage: {
     "embeds": [{
-      "title": "Welcome to Discord r/place",
+      "title": "Welcome to Discord Place",
       "description": "Here you can set one pixel of a giant canvas (like in r/place on Reddit) and team up with other servers or users to create awesome artworks or overtake others. \n\nTo join all you have to do is react with any emoji to this message.",
       "color": 47296,
       "author": {
-        "name": "rPlace Bot"
+        "name": "Place Bot"
       },
       "footer": {
         "text": "made by tensoid"
@@ -28,7 +28,7 @@ module.exports = {
         }
       ],
       "author": {
-        "name": "rPlace Bot"
+        "name": "Place Bot"
       },
       "footer": {
         "text": "made by tensoid"
