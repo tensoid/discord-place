@@ -40,6 +40,8 @@ const dbAccess = {
       db.place[x][y] = color;
       user.lastDrawTime = Date.now();
 
+      db.changes.push({x, y, color});
+
       // broadcast to clients
       getServer().tilePlaced(x, y, color);
 
