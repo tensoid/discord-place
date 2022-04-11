@@ -3,6 +3,8 @@ class Camera {
     this.zoomElement = document.querySelector(".zoom-element");
     this.panElement = document.querySelector(".pan-element");
     this.cameraElement = document.querySelector(".camera");
+
+    this.redirectDefaultResize();
   }
 
   init(zoomElementWidth, zoomElementHeight){
@@ -68,5 +70,19 @@ class Camera {
 
   setPanElementPosition(x, y){
     this.panElement.style.transform = `translateX(${x}px) translateY(${y}px)`;
+  }
+
+  redirectDefaultResize(){
+    document.addEventListener("keydown", function(event) {
+      if (event.ctrlKey==true && (event.key == '+' || event.key == '-') ) {
+        event.preventDefault();
+      }
+    });
+
+    document.addEventListener("wheel", function(event) {
+      if (event.ctrlKey == true) {
+        event.preventDefault();
+      }
+    }, {passive: false});
   }
 }
