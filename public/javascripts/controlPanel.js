@@ -47,13 +47,13 @@ class ControlPanel {
   }
 
   setSelectedColor(colorBlockElement){
-    this.selectedColor = colorBlockElement.id;
-    colorBlockElement.style.border = "4px solid rgba(0,0,0, 0.25)";
 
     if(this.previousColorBlockElement != null) {
       this.previousColorBlockElement.style.border = "none";
     }
-      
+
+    this.selectedColor = colorBlockElement.id;
+    colorBlockElement.style.border = "4px solid rgba(0,0,0, 0.25)";
 
     this.previousColorBlockElement = colorBlockElement;
   }
