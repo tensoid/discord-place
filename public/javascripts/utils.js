@@ -82,3 +82,14 @@ const Color = {
     }
   }
 }
+
+
+const Vec2 = {
+  lerp(origin, dest, t){
+    t = Math.max(0, Math.min(1, t));
+    return {
+      x: origin.x + (dest.x - origin.x) * t,
+      y: origin.y + (dest.y - origin.y) * t
+    }
+  }
+}

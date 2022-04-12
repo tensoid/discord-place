@@ -6,10 +6,20 @@ let camera = new Camera();
 let cursor = new Cursor();
 
 
+// ----[Variables]----------------------
+let lastTime = Date.now();
+
 
 // ----[Main Loop]----------------------
 function loop(){
   requestAnimationFrame(loop);
+
+  // calculate delta time
+  let now = Date.now();
+  let deltaTime = (now - lastTime) / 1000;
+  lastTime = now;
+
+  cursor.tick(deltaTime);
 }
 
 

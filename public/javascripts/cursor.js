@@ -18,11 +18,61 @@ class Cursor {
       y: 0 
     };
 
+    this.desiredCurserPosition = {
+      x: 0,
+      y: 0 
+    };
+
+    this.animationProgress = 0;
+    this.inAnimation = false;
+
+
     this.initEventListeners();
   }
 
+  tick(deltaTime){
+    if(!this.inAnimation) {
+      this.animationProgress = 0;
+      return;
+    }
+    
+    let currentCurserPositionScreen = {
+      x: this.worldToScreenSpace(this.currentCurserPosition.x, this.currentCurserPosition.y).x,
+      y: this.worldToScreenSpace(this.currentCurserPosition.x, this.currentCurserPosition.y).y
+    }
+
+    let newCurserPositionScreen = {
+      x: this.worldToScreenSpace(this.desiredCurserPosition.x, this.desiredCurserPosition.y).x,
+      y: this.worldToScreenSpace(this.desiredCurserPosition.x, this.desiredCurserPosition.y).y
+    }
+
+    this.animationProgress += deltaTime;
+    
+    let cameraOffset = Vec2.lerp(currentCurserPositionScreen, newCurserPositionScreen, this.animationProgress);
+    cameraOffset = {
+      x: currentCurserPositionScreen.x - cameraOffset.x,
+      y: currentCurserPositionScreen.y - cameraOffset.y
+    }
+
+    //camera.updatePosition(cameraOffset.x, cameraOffset.y);
+    camera.setPosition(camera.getOffsetX() + cameraOffset.x, camera.getOffsetY() + cameraOffset.y);
+    this.centerCursor();
+    
+    console.log(this.animationProgress);
+
+    if(this.animationProgress >= 1 || this.currentCurserPosition.x == this.desiredCurserPosition.x && this.currentCurserPosition.y == this.desiredCurserPosition.y){
+      this.inAnimation = false;
+      this.animationProgress = 0;
+      this.currentCurserPosition.x = this.desiredCurserPosition.x;
+      this.currentCurserPosition.y = this.desiredCurserPosition.y;
+      console.log("animation finished");
+    }
+  }
+
   init(){
-    this.updateCursor();
+    this.centerCursor();
+    this.setDesiredCurserPosition(this.currentCurserPosition.y, this.currentCurserPosition.x);
+    this.resizeCursor();
     this.curserElement.style.opacity = 1;
   }
 
@@ -49,7 +99,10 @@ class Cursor {
 
     if (diffX < 6 && diffY < 6) {
       let coords = this.getSelectedPixel();
-      this.setCursorPosition(coords.x, coords.y);
+      if(this.isValidPosition(coords.x, coords.y)) {
+        this.inAnimation = true;
+        this.setDesiredCurserPosition(coords.x, coords.y);
+      }
     }
 
     this.mouseDragging = false;
@@ -68,10 +121,11 @@ class Cursor {
 
     // update the camera position
     if (this.mouseDragging) {
+      if(this.inAnimation) return;
       camera.updatePosition(deltaX, deltaY);
+      this.centerCursor();
+      this.setDesiredCurserPosition(this.currentCurserPosition.y, this.currentCurserPosition.x);
     }    
-
-    this.updateCursor();
   }
 
   onMouseWheel(e) {
@@ -90,8 +144,8 @@ class Cursor {
     // update the camera position
     camera.updatePosition(-(mousePosWorldBeforeZoom.x - mousePosWorldAfterZoom.x) * 40 * camera.getScale(), -(mousePosWorldBeforeZoom.y - mousePosWorldAfterZoom.y)* 40 * camera.getScale());
     
-    this.updateCursor();
-    this.curserElement.style.opacity = 1;
+    this.resizeCursor();
+    this.centerCursor();
   }
 
 
@@ -123,12 +177,7 @@ class Cursor {
 
   setCursorPosition(x, y){
 
-    if(x === null || y === null) return;
-    if(x < 0 || y < 0) return;
-    if(x >= canvas.width || y >= canvas.height) return;
-
-    //if(camera.getScale() < 0.2) this.curserElement.style.opacity = 1;
-    //else this.curserElement.style.opacity = 1;
+    if(!this.isValidPosition(x, y)) return;
 
     this.currentCurserPosition.x = x;
     this.currentCurserPosition.y = y;
@@ -141,9 +190,42 @@ class Cursor {
     this.coordinateDisplayElement.innerText = `${x}, ${y}`;
   }
 
-  updateCursor(){
+  setDesiredCurserPosition(x, y){
+
+    if(!this.isValidPosition(x, y)) return;
+
+    console.log(`setDesiredCurserPosition(${x}, ${y})`);
+    console.log(this.currentCurserPosition);
+    this.desiredCurserPosition.x = x;
+    this.desiredCurserPosition.y = y;  
+  }
+
+
+  centerCursor(){
+
+    // get the current pixel in center of screen
+    let curserPositionWorld = this.screenToWorldSpace(this.cameraElement.clientWidth / 2, this.cameraElement.clientHeight / 2);
+    curserPositionWorld.x = Math.floor(curserPositionWorld.x);
+    curserPositionWorld.y = Math.floor(curserPositionWorld.y);
+    curserPositionWorld.x = Math.min(Math.max(curserPositionWorld.x, 0), canvas.width - 1);
+    curserPositionWorld.y = Math.min(Math.max(curserPositionWorld.y, 0), canvas.height - 1);
+    this.currentCurserPosition.x = curserPositionWorld.x;
+    this.currentCurserPosition.y = curserPositionWorld.y;
+
+    // set curser position
     this.setCursorPosition(this.currentCurserPosition.x, this.currentCurserPosition.y);
+  }
+
+  resizeCursor(){
     this.curserElement.style.width = `${46 * camera.getScale()}px`;
     this.curserElement.style.height = `${46 * camera.getScale()}px`;
+  }
+
+  isValidPosition(x, y){
+    if(x === null || y === null) return false;
+    if(x < 0 || y < 0) return false;
+    if(x >= canvas.width || y >= canvas.height) return false;
+
+    return true;
   }
 }

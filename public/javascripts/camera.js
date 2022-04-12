@@ -7,6 +7,7 @@ class Camera {
     this.redirectDefaultResize();
   }
 
+
   init(zoomElementWidth, zoomElementHeight){
     this.zoomElement.style.width = `${zoomElementWidth}px`;
     this.zoomElement.style.height = `${zoomElementHeight}px`;
@@ -38,6 +39,16 @@ class Camera {
     let newScale = oldScale * scale;
     newScale = Math.min(1, newScale);
     this.zoomElement.style.transform = `scale(${newScale})`;
+  }
+
+  setPosition(x, y){
+    // clamp to screenspace
+    let canvasSize = this.zoomElement.getBoundingClientRect();
+    x = Math.min(this.cameraElement.clientWidth / 2, x);
+    x = Math.max(this.cameraElement.clientWidth / 2 - canvasSize.width, x);
+    y = Math.min(this.cameraElement.clientHeight / 2, y);
+    y = Math.max(this.cameraElement.clientHeight / 2 - canvasSize.height, y);
+    this.setPanElementPosition(x, y);
   }
 
   updatePosition(x, y){
