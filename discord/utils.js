@@ -1,10 +1,9 @@
 module.exports = {
   welcomeMessage: {
-    "content": "@everyone",
     "embeds": [{
       "title": "Welcome to Discord Place",
-      "description": "Here you can set one pixel of a giant canvas (like in r/place on Reddit) and team up with other servers or users to create awesome artworks or overtake others. \n\nTo join, all you have to do is react with any emoji to this message.\n\nIf you encounter any bugs, please contact me via the contact information on my  [GitHub Profile](https://github.com/tensoid/) or create an issue on the [Repository](https://github.com/tensoid/discord-place).",
-      "url": "https://github.com/tensoid/discord-place",
+      "description": `Here you can set one pixel of a giant canvas (like in r/place on Reddit) and team up with other servers or users to create awesome artworks or overtake others. \n\nTo join, all you have to do is react with any emoji to this message.\n\nPlace Link: ${process.env.URL}\n\nIf you encounter any bugs, please contact me via the contact information on my  [GitHub Profile](https://github.com/tensoid/) or create an issue on the [Repository](https://github.com/tensoid/discord-place).`,
+      "url": process.env.URL,
       "color": 47296,
       "author": {
         "name": "rPlace Bot"
