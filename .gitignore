@@ -1,7 +1,6 @@
 # Custom
 *.env
 embeds-raw.txt
-todo.txt
 
 # Logs
 logs

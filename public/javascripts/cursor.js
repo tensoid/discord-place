@@ -54,12 +54,18 @@ class Cursor {
       y: currentCurserPositionScreen.y - cameraOffset.y
     }
 
+    //camera.updatePosition(cameraOffset.x, cameraOffset.y);
     camera.setPosition(camera.getOffsetX() + cameraOffset.x, camera.getOffsetY() + cameraOffset.y);
     this.centerCursor();
     
+    console.log(this.animationProgress);
+
     if(this.animationProgress >= 1 || this.currentCurserPosition.x == this.desiredCurserPosition.x && this.currentCurserPosition.y == this.desiredCurserPosition.y){
       this.inAnimation = false;
       this.animationProgress = 0;
+      this.currentCurserPosition.x = this.desiredCurserPosition.x;
+      this.currentCurserPosition.y = this.desiredCurserPosition.y;
+      console.log("animation finished");
     }
   }
 
@@ -211,6 +217,8 @@ class Cursor {
 
     if(!this.isValidPosition(x, y)) return;
 
+    console.log(`setDesiredCurserPosition(${x}, ${y})`);
+    console.log(this.currentCurserPosition);
     this.desiredCurserPosition.x = x;
     this.desiredCurserPosition.y = y;  
   }
