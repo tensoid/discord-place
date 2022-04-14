@@ -38,6 +38,7 @@ class Camera {
     // update the scale value and clamp
     let newScale = oldScale * scale;
     newScale = Math.min(1, newScale);
+    newScale = Math.max(1 / 40, newScale);
     this.zoomElement.style.transform = `scale(${newScale})`;
   }
 
