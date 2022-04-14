@@ -84,19 +84,19 @@ class Cursor {
 
     if(this.inAnimation) return;
 
-    if(e.key == "ArrowRight"){
+    if(e.key == "ArrowRight" || e.key.toLowerCase() == "d"){
       this.inAnimation = true;
       this.setDesiredCurserPosition(this.currentCurserPosition.x + 1, this.currentCurserPosition.y);
     }
-    else if(e.key == "ArrowLeft"){
+    else if(e.key == "ArrowLeft" || e.key.toLowerCase() == "a"){
       this.inAnimation = true;
       this.setDesiredCurserPosition(this.currentCurserPosition.x - 1, this.currentCurserPosition.y);
     }
-    else if(e.key == "ArrowUp"){
+    else if(e.key == "ArrowUp" || e.key.toLowerCase() == "w"){
       this.inAnimation = true;
       this.setDesiredCurserPosition(this.currentCurserPosition.x, this.currentCurserPosition.y - 1);
     }
-    else if(e.key == "ArrowDown"){
+    else if(e.key == "ArrowDown" || e.key.toLowerCase() == "s"){
       this.inAnimation = true;
       this.setDesiredCurserPosition(this.currentCurserPosition.x, this.currentCurserPosition.y + 1);
     }
