@@ -77,6 +77,29 @@ class Cursor {
     window.addEventListener("mouseup", this.onMouseUp.bind(this)); 
     this.cameraElement.addEventListener("mousemove", this.onMouseMove.bind(this));
     this.cameraElement.addEventListener("wheel", this.onMouseWheel.bind(this));
+    window.addEventListener("keyup", this.onKeyUp.bind(this));
+  }
+
+  onKeyUp(e){
+
+    if(this.inAnimation) return;
+
+    if(e.key == "ArrowRight"){
+      this.inAnimation = true;
+      this.setDesiredCurserPosition(this.currentCurserPosition.x + 1, this.currentCurserPosition.y);
+    }
+    else if(e.key == "ArrowLeft"){
+      this.inAnimation = true;
+      this.setDesiredCurserPosition(this.currentCurserPosition.x - 1, this.currentCurserPosition.y);
+    }
+    else if(e.key == "ArrowUp"){
+      this.inAnimation = true;
+      this.setDesiredCurserPosition(this.currentCurserPosition.x, this.currentCurserPosition.y - 1);
+    }
+    else if(e.key == "ArrowDown"){
+      this.inAnimation = true;
+      this.setDesiredCurserPosition(this.currentCurserPosition.x, this.currentCurserPosition.y + 1);
+    }
   }
 
   onMouseDown(e) {
