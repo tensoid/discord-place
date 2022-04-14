@@ -4,6 +4,7 @@
  * Initialize dotenv
  */
 require('dotenv').config()
+validateEnvs();
 
 /**
  * Initialize database
@@ -98,4 +99,34 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+}
+
+
+function validateEnvs() {
+  var missingEnvs = [];
+  if (!process.env.DISCORD_BOT_TOKEN) {
+    missingEnvs.push("DISCORD_BOT_TOKEN");
+  }
+  if (!process.env.ADMIN_API_TOKEN) {
+    missingEnvs.push("ADMIN_API_TOKEN");
+  }
+  if (!process.env.URL) {
+    missingEnvs.push("URL");
+  }
+
+  if (missingEnvs.length <= 0) return;
+  
+  logError("Missing environment variables:");
+  missingEnvs.forEach(function(env){
+    logError(`- ${env}`);
+  });
+
+  logError("\nEither set them or create a .env file in the root directory.");
+  logError("For more information, see https://github.com/tensoid/discord-place");
+
+  process.exit(1);
+}
+
+function logError(msg){
+  console.error("\x1b[31m%s\x1b[0m", msg);
 }
