@@ -3,8 +3,7 @@ class Cursor {
 
     this.cameraElement = document.querySelector(".camera");
     this.curserElement = document.querySelector(".cursor");
-    this.coordinateDisplayElement = document.querySelector(".coordinate-display");
-  
+      
     this.mouseDown = false;
     this.mouseDragging = false;
     this.mouseStartX = 0;
@@ -106,7 +105,7 @@ class Cursor {
     this.curserElement.style.left = `${screenSpace.x - 3 * camera.getScale()}px`;
     this.curserElement.style.top = `${screenSpace.y - 3 * camera.getScale()}px`;
 
-    this.coordinateDisplayElement.innerText = `${x}, ${y}`;
+    coordinateDisplay.setCoordinate(x, y);
   }
 
   setDesiredCurserPosition(x, y){

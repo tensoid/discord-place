@@ -5,6 +5,7 @@ let canvas = new Canvas();
 let camera = new Camera();
 let cursor = new Cursor();
 let eventManager = new EventManager();
+let coordinateDisplay = new CoordinateDisplay();
 
 
 // ----[Variables]----------------------
