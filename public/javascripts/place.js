@@ -4,6 +4,7 @@ let controlPanel = new ControlPanel();
 let canvas = new Canvas();
 let camera = new Camera();
 let cursor = new Cursor();
+let eventManager = new EventManager();
 
 
 // ----[Variables]----------------------
@@ -88,5 +89,9 @@ function onTilePlaced(data){
 networkManager.setOnPlaceCallback(onPlace);
 networkManager.setOnTilePlacedCallback(onTilePlaced);
 
+
+// ----[DOM Events]----------------------
+eventManager.initControlPanelEvents();
+eventManager.initCameraEvents();
 
 loop();

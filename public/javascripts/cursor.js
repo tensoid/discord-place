@@ -25,9 +25,6 @@ class Cursor {
 
     this.animationProgress = 0;
     this.inAnimation = false;
-
-
-    this.initEventListeners();
   }
 
   tick(deltaTime){
@@ -68,101 +65,6 @@ class Cursor {
     this.setDesiredCurserPosition(this.currentCurserPosition.y, this.currentCurserPosition.x);
     this.resizeCursor();
     this.curserElement.style.opacity = 1;
-  }
-
-  initEventListeners() {
-    this.cameraElement.addEventListener("mousedown", this.onMouseDown.bind(this));
-    // window is needed to capture mouseup events outside of the canvas to stop 
-    // the dragging if the mouse goes out of the canvas while dragging
-    window.addEventListener("mouseup", this.onMouseUp.bind(this)); 
-    this.cameraElement.addEventListener("mousemove", this.onMouseMove.bind(this));
-    this.cameraElement.addEventListener("wheel", this.onMouseWheel.bind(this));
-    window.addEventListener("keyup", this.onKeyUp.bind(this));
-  }
-
-  onKeyUp(e){
-
-    if(this.inAnimation) return;
-
-    if(e.key == "ArrowRight" || e.key.toLowerCase() == "d"){
-      this.inAnimation = true;
-      this.setDesiredCurserPosition(this.currentCurserPosition.x + 1, this.currentCurserPosition.y);
-    }
-    else if(e.key == "ArrowLeft" || e.key.toLowerCase() == "a"){
-      this.inAnimation = true;
-      this.setDesiredCurserPosition(this.currentCurserPosition.x - 1, this.currentCurserPosition.y);
-    }
-    else if(e.key == "ArrowUp" || e.key.toLowerCase() == "w"){
-      this.inAnimation = true;
-      this.setDesiredCurserPosition(this.currentCurserPosition.x, this.currentCurserPosition.y - 1);
-    }
-    else if(e.key == "ArrowDown" || e.key.toLowerCase() == "s"){
-      this.inAnimation = true;
-      this.setDesiredCurserPosition(this.currentCurserPosition.x, this.currentCurserPosition.y + 1);
-    }
-  }
-
-  onMouseDown(e) {
-    this.mouseDown = true;
-    this.mouseStartX = e.clientX;
-    this.mouseStartY = e.clientY;
-  }
-
-  onMouseUp(e) {
-
-    // detect if a mouse click was made and not a drag
-    const diffX = Math.abs(e.clientX - this.mouseStartX);
-    const diffY = Math.abs(e.clientY - this.mouseStartY);
-
-    if (diffX < 6 && diffY < 6) {
-      let coords = this.getSelectedPixel();
-      if(this.isValidPosition(coords.x, coords.y)) {
-        this.inAnimation = true;
-        this.setDesiredCurserPosition(coords.x, coords.y);
-      }
-    }
-
-    this.mouseDragging = false;
-    this.mouseDown = false;
-  }
-
-  onMouseMove(e) {
-
-    if(this.mouseDown) this.mouseDragging = true;
-
-    // get mouse delta
-    let deltaY = e.clientY - this.mouseY;
-    let deltaX = e.clientX - this.mouseX;
-    this.mouseX = e.clientX;
-    this.mouseY = e.clientY;
-
-    // update the camera position
-    if (this.mouseDragging) {
-      if(this.inAnimation) return;
-      camera.updatePosition(deltaX, deltaY);
-      this.centerCursor();
-      this.setDesiredCurserPosition(this.currentCurserPosition.y, this.currentCurserPosition.x);
-    }    
-  }
-
-  onMouseWheel(e) {
-
-    let mousePosWorldBeforeZoom = this.screenToWorldSpace(this.mouseX, this.mouseY);
-
-    // get mousewheel delta
-    let delta = e.deltaY;
-
-    // update the camera scale
-    if (delta > 0) camera.updateScale(0.9);
-    else camera.updateScale(1.1);
-
-    let mousePosWorldAfterZoom = this.screenToWorldSpace(this.mouseX, this.mouseY);
-
-    // update the camera position
-    camera.updatePosition(-(mousePosWorldBeforeZoom.x - mousePosWorldAfterZoom.x) * 40 * camera.getScale(), -(mousePosWorldBeforeZoom.y - mousePosWorldAfterZoom.y)* 40 * camera.getScale());
-    
-    this.resizeCursor();
-    this.centerCursor();
   }
 
 

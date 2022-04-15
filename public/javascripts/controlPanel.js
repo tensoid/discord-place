@@ -5,17 +5,6 @@ class ControlPanel {
     this.currentCooldown = 0;
     this.cooldownElement = document.querySelector(".cooldown");
 
-    this.submitButtonElement = document.querySelector(".submit-button");
-    this.submitButtonElement.addEventListener("click", () => {
-      if(this.submitButtonPressedCallback) this.submitButtonPressedCallback();
-    });
-
-    window.addEventListener("keyup", (e) => {
-      if(e.key == " ") {
-        if(this.submitButtonPressedCallback) this.submitButtonPressedCallback();
-      }
-    });
-
     this.setSelectedColor(document.querySelector(".color-block"));
     this.previousColorBlockElement = document.querySelector(".color-block");
     this.submitButtonPressedCallback = null;
