@@ -35,15 +35,14 @@ const dbAccess = {
         return {result: -1, message: "Invalid arguments"};
       }
 
-
       // place pixel
-      db.place[x][y] = color;
+      db.place[x][y] = {color, author: user.name};
       user.lastDrawTime = Date.now();
 
-      db.changes.push({x, y, color});
+      db.changes.push({x, y, color, author: user.name, time: Date.now()});
 
       // broadcast to clients
-      getServer().tilePlaced(x, y, color);
+      getServer().tilePlaced(x, y, color, user.name);
 
       return {result: 0, message: "Success", cooldown: config.placeCooldown};
     },

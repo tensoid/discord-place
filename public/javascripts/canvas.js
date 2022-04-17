@@ -16,7 +16,7 @@ class Canvas {
     for(let x = 0; x < place.length; x++){
       for(let y = 0; y < place[0].length; y++){
 
-        let pixelColor = Color.pixelStateToColor(place[x][y]);        
+        let pixelColor = Color.pixelStateToColor(place[x][y].color);        
 
         this.ctx.fillStyle = pixelColor;
         this.ctx.fillRect(x, y, 1, 1);

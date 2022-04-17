@@ -35,8 +35,8 @@ class NetworkManager {
   }
 
 
-  tilePlaced(x, y, color) {
-    this.server.emit("tilePlaced", {x, y, color});
+  tilePlaced(x, y, color, author) {
+    this.server.emit("tilePlaced", {x, y, color, author});
   }
 
   canvasReset(){
