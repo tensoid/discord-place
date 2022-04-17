@@ -42,4 +42,8 @@ class NetworkManager {
   canvasReset(){
     this.server.emit("place", this.db.place.get());
   }
+
+  canvasResize(){
+    this.server.emit("place", this.db.place.get());
+  }
 }

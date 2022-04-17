@@ -54,6 +54,25 @@ router.get('/resetcanvas', function(req, res, next) {
 });
 
 
+router.get('/resizecanvas', function(req, res, next) {
+  let adminToken = req.query.token;
+  let sizeX = req.query.sizex;
+  let sizeY = req.query.sizey;
+
+  if(!sizeX || !sizeY || !adminToken) {
+    return res.json({code: -1, message: "Invalid arguments"});
+  }
+
+  if(!isNumeric(sizeX) || !isNumeric(sizeY)) {
+    return res.json({code: -1, message: "Invalid arguments"});
+  }
+
+  let result = db.place.tryResizeCanvas(parseInt(sizeX), parseInt(sizeY), adminToken);
+
+  return res.json(result);
+});
+
+
 router.get('/setcooldown', function(req, res, next) {
   let adminToken = req.query.token;
   let cooldown = req.query.cooldown;

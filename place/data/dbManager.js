@@ -69,6 +69,19 @@ const dbAccess = {
       return {result: 0, message: "Success"};
     },
 
+    tryResizeCanvas(sizeX, sizeY, token){
+      if(token != process.env.ADMIN_API_TOKEN){
+        return {result: -3, message: "Not authorized"};
+      }
+
+      db.place = utils.resizeArray(db.place, sizeX, sizeY);
+
+      // broadcast to clients
+      getServer().canvasResize();
+      
+      return {result: 0, message: "Success"};
+    },
+
     trySetCooldown(cooldown, token){
       if(token != process.env.ADMIN_API_TOKEN){
         return {result: -3, message: "Not authorized"};

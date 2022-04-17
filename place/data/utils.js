@@ -15,5 +15,37 @@ module.exports = {
     let sizeY = db.place.get()[0].length;
 
     return x >= 0 && x < sizeX && y >= 0 && y < sizeY;
+  },
+
+  resizeArray(arr, width, height){
+
+    let neededWidth = width - arr.length;
+  
+    if (neededWidth > 0) {
+      for (let i = 0; i < neededWidth; i++) {
+        arr.push([]);
+      }
+    } else if (neededWidth < 0) {
+      for (let i = 0; i < -neededWidth; i++) {
+        arr.pop();
+      }
+    }
+  
+    for (let i = 0; i < arr.length; i++) {
+      let row = arr[i];
+      let neededHeight = height - row.length;
+  
+      if (neededHeight > 0) {
+        for (let j = 0; j < neededHeight; j++) {
+          row.push(0);
+        }
+      } else if (neededHeight < 0) {
+        for (let j = 0; j < -neededHeight; j++) {
+          row.pop();
+        }
+      }
+    }
+  
+    return arr;
   }
 }
