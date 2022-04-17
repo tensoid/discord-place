@@ -10,6 +10,7 @@ let coordinateDisplay = new CoordinateDisplay();
 
 // ----[Variables]----------------------
 let lastTime = Date.now();
+let place = null;
 
 
 // ----[Main Loop]----------------------
@@ -76,7 +77,8 @@ controlPanel.setSubmitButtonPressedCallback(onSubmitButtonPressed);
 
 
 // ----[Network Events]----------------------
-function onPlace(place){
+function onPlace(placeData){
+  place = placeData;
   canvas.init(place.length, place[0].length);
   canvas.drawPlace(place);
   camera.init(40 * place.length, 40 * place[0].length);
@@ -85,6 +87,8 @@ function onPlace(place){
 
 function onTilePlaced(data){
   canvas.drawPixel(data.x, data.y, data.color);
+  place[data.x][data.y] = {color: data.color, author: data.author};
+  coordinateDisplay.setCoordinate(data.x, data.y, data.author);
 }
 
 networkManager.setOnPlaceCallback(onPlace);

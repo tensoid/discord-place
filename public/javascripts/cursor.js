@@ -105,7 +105,7 @@ class Cursor {
     this.curserElement.style.left = `${screenSpace.x - 3 * camera.getScale()}px`;
     this.curserElement.style.top = `${screenSpace.y - 3 * camera.getScale()}px`;
 
-    coordinateDisplay.setCoordinate(x, y);
+    coordinateDisplay.setCoordinate(x, y, place[x][y].author);
   }
 
   setDesiredCurserPosition(x, y){

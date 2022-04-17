@@ -3,7 +3,12 @@ class CoordinateDisplay {
     this.coordinateDisplayElement = document.querySelector(".coordinate-display");
   }
 
-  setCoordinate(x, y){
-    this.coordinateDisplayElement.innerText = `${x}, ${y}`;
+  setCoordinate(x, y, author){
+    if(author != null) {
+      this.coordinateDisplayElement.innerText = `${x}, ${y} by ${author}`;
+    }
+    else {
+      this.coordinateDisplayElement.innerText = `${x}, ${y}`;
+    }
   }
 }
