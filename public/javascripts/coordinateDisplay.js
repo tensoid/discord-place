@@ -3,7 +3,12 @@ class CoordinateDisplay {
     this.coordinateDisplayElement = document.querySelector(".coordinate-display");
   }
 
-  setCoordinate(x, y, author){
+  updateCoordinate(){
+
+    let x = cursor.currentCurserPosition.x;
+    let y = cursor.currentCurserPosition.y;
+    let author = place[x][y].author;
+
     if(author != null) {
       this.coordinateDisplayElement.innerText = `${x}, ${y} by ${author}`;
     }

@@ -88,7 +88,7 @@ function onPlace(placeData){
 function onTilePlaced(data){
   canvas.drawPixel(data.x, data.y, data.color);
   place[data.x][data.y] = {color: data.color, author: data.author};
-  coordinateDisplay.setCoordinate(data.x, data.y, data.author);
+  coordinateDisplay.updateCoordinate();
 }
 
 networkManager.setOnPlaceCallback(onPlace);
