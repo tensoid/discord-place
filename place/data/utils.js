@@ -7,7 +7,7 @@ module.exports = {
   },
 
   isValidColor(color){
-    return color >= 0 && color <= 23;
+    return color >= 0 && color <= 29;
   },
 
   isValidPixel(x, y, db){

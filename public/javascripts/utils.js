@@ -78,6 +78,12 @@ const Color = {
       case 21: return '#000000';
       case 22: return '#898d90';
       case 23: return '#d4d7d9';
+      case 24: return '#FF2727';
+      case 25: return '#DBCAB0';
+      case 26: return '#323232';
+      case 27: return '#FF782C';
+      case 28: return '#297D00';
+      case 29: return '#964B00';
       default: return '#ffffff';
     }
   }
